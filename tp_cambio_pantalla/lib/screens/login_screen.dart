@@ -4,13 +4,10 @@ import 'package:go_router/go_router.dart';
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
-
-
   @override
   Widget build(BuildContext context) {
-
-      TextEditingController passController = TextEditingController();
-  TextEditingController userController = TextEditingController();
+    TextEditingController passController = TextEditingController();
+    TextEditingController userController = TextEditingController();
     return MaterialApp(
       home: Scaffold(
         body: Column(

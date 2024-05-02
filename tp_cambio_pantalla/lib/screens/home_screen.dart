@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
   String user;
-  HomeScreen({super.key, this.user = ''});
+  HomeScreen({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +14,8 @@ class HomeScreen extends StatelessWidget {
       body: Center(
           child: Text(
         'Bienvenido $user',
-        style:
-            const TextStyle(fontSize: 50, color: Color.fromARGB(0, 255, 0, 0)),
+        style: const TextStyle(
+            fontSize: 50, color: Color.fromARGB(255, 255, 0, 0)),
       )),
     );
   }
