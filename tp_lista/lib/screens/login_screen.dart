@@ -33,15 +33,31 @@ class LoginScreen extends StatelessWidget {
                 String userInput = userController.text;
                 String passInput = passController.text;
 
+                List<String> users = ['Natu', 'Pedro', 'Pablo', 'Juan'];
+                List<String> passwords = ['1234', '4321', '2134', '1243'];
+
                 if (userInput.isEmpty || passInput.isEmpty) {
                   print('Vacío');
+                  SnackBar snackBarVacio =
+                      SnackBar(content: const Text('Login correcto'));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBarVacio);
                   return;
                 }
-                if ((userInput == 'Natu') && (passInput == '12345')) {
-                  print('Login exitoso');
-                  context.push('/homeScreen', extra: userInput);
+                if ((users.contains(userInput))) {
+                  if (passwords.contains(passInput) &&
+                      passInput == passwords[passwords.indexOf(userInput)]) {
+                    print('Login exitoso');
+                    SnackBar snackBar =
+                        SnackBar(content: const Text('Login correcto'));
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    context.push('/homeScreen', extra: userInput);
+                  }
                 } else {
                   print('Login Fallido');
+                  SnackBar snackBarIncorrecto =
+                      SnackBar(content: const Text('Login correcto'));
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(snackBarIncorrecto);
                 }
               },
               child: const Text('Login'),
