@@ -45,7 +45,7 @@ class LoginScreen extends StatelessWidget {
                 }
                 if ((users.contains(userInput))) {
                   if (passwords.contains(passInput) &&
-                      passInput == passwords[passwords.indexOf(userInput)]) {
+                      passInput == passwords[users.indexOf(userInput)]) {
                     print('Login exitoso');
                     SnackBar snackBar =
                         SnackBar(content: const Text('Login correcto'));
