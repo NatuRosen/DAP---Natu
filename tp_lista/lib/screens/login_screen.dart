@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tp2/entities/users.dart';
+
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -33,27 +35,35 @@ class LoginScreen extends StatelessWidget {
                 String userInput = userController.text;
                 String passInput = passController.text;
 
-                List<String> users = ['Natu', 'Pedro', 'Pablo', 'Juan'];
-                List<String> passwords = ['1234', '4321', '2134', '1243'];
+                List<Usuarios> users = [
+                  Usuarios('natu', '1234'),
+                  Usuarios('juan', '4321'),
+                  Usuarios('pepe', 'hola'),
+                  Usuarios('pipu', 'chau'),
+                  ];
 
                 if (userInput.isEmpty || passInput.isEmpty) {
                   print('Vacío');
                   SnackBar snackBarVacio = const SnackBar(
-                      content: Text('Usuario o contraseña vacío'),);
-                      
+                    content: Text('Usuario o contraseña vacío'),
+                  );
                   ScaffoldMessenger.of(context).showSnackBar(snackBarVacio);
                   return;
                 }
-                if ((users.contains(userInput))) {
-                  if (passwords.contains(passInput) &&
-                      passInput == passwords[users.indexOf(userInput)]) {
-                    print('Login exitoso');
-                    context.go('/homeScreen', extra: userInput);
-                  }
+
+                Usuarios? foundUser = users.firstWhere(
+                  (usuario) => usuario.user == userInput && usuario.pass == passInput,
+                  
+                );
+
+                if (foundUser != null) {
+                  print('Login exitoso');
+                  context.go('/homeScreen', extra: userInput);
                 } else {
                   print('Login Fallido');
-                  SnackBar snackBarIncorrecto =
-                      SnackBar(content: const Text('Login correcto'));
+                  SnackBar snackBarIncorrecto = SnackBar(
+                    content: const Text('Usuario o contraseña incorrectos'),
+                  );
                   ScaffoldMessenger.of(context).showSnackBar(snackBarIncorrecto);
                 }
               },

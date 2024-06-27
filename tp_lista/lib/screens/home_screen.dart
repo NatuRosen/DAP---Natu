@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -25,9 +27,14 @@ class HomeScreen extends StatelessWidget {
             itemCount: pais.length,
             itemBuilder: (context, index) {
               return Card(
-                child: ListTile(
-                title: Text(pais[index]),
-                subtitle: Text(capital[index]),
+                child: Row(
+                children: <Widget> [
+                
+                Text(pais[index]),
+                Text(capital[index]),
+                Image.network(imagen[index]),
+                ],
+
               ));
             }));
   }
