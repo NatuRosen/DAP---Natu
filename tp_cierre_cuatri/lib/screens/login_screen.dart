@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tp_cierre_cuatri/entities/users.dart';
 
-
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
@@ -40,7 +39,7 @@ class LoginScreen extends StatelessWidget {
                   Usuarios('juan', '4321'),
                   Usuarios('pepe', 'hola'),
                   Usuarios('pipu', 'chau'),
-                  ];
+                ];
 
                 if (userInput.isEmpty || passInput.isEmpty) {
                   print('Vacío');
@@ -53,9 +52,10 @@ class LoginScreen extends StatelessWidget {
 
                 Usuarios? foundUser = users.firstWhere(
                   (usuario) => usuario.user == userInput && usuario.pass == passInput,
+                  orElse: () => Usuarios('0', '0') // Devolver una instancia vacía de Usuarios
                 );
 
-                if (foundUser != Null) {
+                if (foundUser != Usuarios('0', '0')) {
                   print('Login exitoso');
                   context.go('/homeScreen', extra: userInput);
                 } else {
