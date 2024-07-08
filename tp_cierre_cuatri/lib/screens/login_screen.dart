@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tp_cierre_cuatri/entities/users.dart';
+import 'package:tp_cierre_cuatri/screens/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
+  static const String name = 'login';
+
   LoginScreen({super.key});
 
   @override
@@ -40,30 +43,36 @@ class LoginScreen extends StatelessWidget {
                   Usuarios('pepe', 'hola'),
                   Usuarios('pipu', 'chau'),
                 ];
+                var snackBarVacio = SnackBar(
+                   content: const Text("Usuario incorrecto"),
+                   action: SnackBarAction(
+                  label: 'Descartar',
+                  onPressed: () {},
+                  ));
+
+                var snackBarIncorrecto = SnackBar(
+                   content: const Text("Usuario incorrecto"),
+                   action: SnackBarAction(
+                  label: 'Descartar',
+                  onPressed: () {},
+                  ));
 
                 if (userInput.isEmpty || passInput.isEmpty) {
                   print('Vacío');
-                  /*SnackBar snackBarVacio = const SnackBar(
-                    content: Text('Usuario o contraseña vacío'),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBarVacio);*/
+                  
+                  ScaffoldMessenger.of(context).showSnackBar(snackBarVacio);
                   return;
                 }
 
-                Usuarios? foundUser = users.firstWhere(
-                  (usuario) => usuario.user == userInput && usuario.pass == passInput,
-                  orElse: () => Usuarios('0', '0') // Devolver una instancia vacía de Usuarios
-                );
-
-                if (foundUser != Usuarios('0', '0')) {
+                int x = users.indexWhere((Usuarios) => Usuarios.user == userController.text);
+                if (x != -1) {
+                  if(users[x].pass == passController.text){
                   print('Login exitoso');
-                  context.go('/homeScreen', extra: userInput);
+                  context.pushNamed(HomeScreen.name);
+                }
                 } else {
                   print('Login Fallido');
-                  /*SnackBar snackBarIncorrecto = SnackBar(
-                    content: const Text('Usuario o contraseña incorrectos'),
-                  );
-                  //ScaffoldMessenger.of(context).showSnackBar(snackBarIncorrecto);*/
+                  ScaffoldMessenger.of(context).showSnackBar(snackBarIncorrecto);
                 }
               },
               child: const Text('Login'),
