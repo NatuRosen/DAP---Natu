@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tp_cierre_cuatri/entities/users.dart';
+import 'package:tp_cierre_cuatri/screens/description_screen.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
@@ -32,9 +34,9 @@ class HomeScreen extends StatelessWidget {
               title: Text(pais[index].pais),
               subtitle: Text(pais[index].capital),
               leading: SizedBox(width: 50, height: 50, child: Image.network(pais[index].bandera)),
-              /*onTap: (){
-                context.pushNamed(DetailScreen.name, extra: pokemones[index]);
-              }*/
+              onTap: (){
+                context.pushNamed(DescriptionScreen.name, extra: pais[index]);
+              }
             ),
                 );
             }));
